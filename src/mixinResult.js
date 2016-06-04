@@ -80,6 +80,14 @@ MixinResult.prototype = {
     assert(!parsers.hasSelector(this.ast, selector), message);
   },
 
+  createsSpecificMediaQuery: function(mediaQuery) {
+    var rule = parsers.findSpecificMedia(this.ast, mediaQuery);
+    // console.log(rule);
+    var media = rule ? rule.media : '';
+    var message = 'Could not find a media query rule with the value: ' + mediaQuery + '.';
+    assert.equal(media, cssmin(mediaQuery), message);
+  },
+
   createsMediaQuery: function(mediaQuery) {
     var rule = parsers.findMedia(this.ast);
     var media = rule ? rule.media : '';

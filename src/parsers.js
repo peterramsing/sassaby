@@ -86,6 +86,26 @@ var Parsers = {
     return found[0];
   },
 
+  findSpecificMedia: function(ast, mediaQuery) {
+    var found = [];
+    var returnedValue;
+
+    ast.stylesheet.rules.forEach(function(rule) {
+      if (rule.type === 'media') {
+        found.push(rule);
+      }
+    });
+
+    var index;
+    for (index = 0; index < found.length; ++index) {
+        if (found[index].media === mediaQuery) {
+            returnedValue = found[index];
+        }
+    }
+
+    return returnedValue;
+  },
+
   hasSelector: function(ast, selectorValue) {
     var found = false;
 
